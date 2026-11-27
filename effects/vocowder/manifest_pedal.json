@@ -1,0 +1,70 @@
+{
+  "effect_name": "Vocowder",
+  "comment": "PEDAL BUILD manifest for Vocowder (9-knob channel vocoder). IN L = modulator, IN R = carrier (+ optional white noise). Params arrive as UI*0.01 (LineSel clones); every knob keeps max <= 101 (103 failed to install). One value box (page knob 1): Bands on page 1, LoCut on page 2, NType on page 3.",
+  "gid": 1,
+  "gid_comment": "0x01 = Dynamics, like XDuck and sForm.",
+  "fxid": 503,
+  "fxid_comment": "0x1F7. Free in stock, themanro dist, matujuice dist and our 501/502.",
+  "fxid_version": "1.30",
+  "fxid_version_comment": "Bump on every pedal build. History: C:\\zoom\\zdlnew\\Vocowder_versions.txt.",
+  "flags_byte": 1,
+  "dsp_cost": 30.0,
+  "params": [
+    {
+      "name": "Bands",
+      "max": 12,
+      "default": 4,
+      "comment": "Number of bands: 4, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 64, 80 (120 Hz .. 7 kHz)."
+    },
+    {
+      "name": "Level",
+      "max": 100,
+      "default": 50,
+      "comment": "Output level: 0 = silent, 50 = 0 dB, 100 = +12 dB (gain = (UI/50)^2), applied before the soft clip on both outputs. Replaced Detct (the detector is fixed at 23)."
+    },
+    {
+      "name": "Mix",
+      "max": 100,
+      "default": 100,
+      "comment": "Dry (modulator) / wet. Ignored when Out = Sep."
+    },
+    {
+      "name": "LoCut",
+      "max": 100,
+      "default": 30,
+      "comment": "High-pass on the carrier only (IN R / saw + noise), 20..800 Hz exponential (30 = 61 Hz). The pedal shows Hz."
+    },
+    {
+      "name": "HiCut",
+      "max": 100,
+      "default": 0,
+      "comment": "Low-pass on the carrier only: 0 = 16 kHz (open) .. 100 = 1 kHz. The pedal shows kHz."
+    },
+    {
+      "name": "Noise",
+      "max": 100,
+      "default": 0,
+      "comment": "Noise added to IN R in the carrier (R is kept), 0..1. With NType = Freez: loop length (FrzL/FRev: how far back the grains reach) 0.1..2.9 s (0 = 0.1 s, 50 = 0.54 s, 60 = 0.75 s, 80 = 1.5 s, 100 = 2.9 s)."
+    },
+    {
+      "name": "NType",
+      "max": 8,
+      "default": 1,
+      "comment": "Noise type: White, Pink, Brown, Green (band around 500 Hz), Blue (rising), Crush (3-bit sample & hold), Freez (IN R frozen when chosen; a grain loops as the carrier, Noise = loop length 0.1..2.9 s), FrzL (IN L itself as a cloud of grains from random points of the last 0.1..2.9 s = Noise), FRev (freeze-reverb: live wash, loud micro-freeze of the last 46 ms, smooth crossfade into FrzL; bright quiet reverb before Level; ~2x longer vocoder release)."
+    },
+    {
+      "name": "Out",
+      "max": 101,
+      "default": 0,
+      "comment": "Mix: both outputs = dry/wet mix. Sep: L = wet, R = clean modulator (Mix ignored). T.LFO: pan one cycle per beat at sForm BPM (120 if none). LFO A / LFO B: pan follows sForm LFO A / B (mailbox, sForm Out=Mem). P0.1..P9.7: wet/dry opposite pan at 0.1..9.7 Hz (Mix as in Mix). max 101 (largest proven)."
+    },
+    {
+      "name": "Gain",
+      "max": 100,
+      "default": 50,
+      "comment": "Vocoder input gain: centre (50) = 0 dB. Right (M+..): boosts the modulator up to +12 dB. Left (C+..): boosts IN R in the carrier up to +12 dB. 0.24 dB steps. The dry signal is not affected."
+    }
+  ],
+  "audio_func_name": "Fx_DYN_Vocowder",
+  "audio_nop": false
+}
